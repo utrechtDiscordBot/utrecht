@@ -6,7 +6,7 @@ module.exports.run  = async (bot, message, args) => {
     var botmessage = args.join(" ");
     message.delete().catch();
     message.channel.send(botmessage);
-
+    if(!botmessage) return message.channel.send("Geef ook een bericht op!");
 
 }
 

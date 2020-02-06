@@ -33,7 +33,7 @@ bot.on("ready", async () => {
 
     console.log(`${bot.user.username} is online!`);
 
-    bot.user.setActivity("Utrecht op Roblox", { type: "PLAYING" });
+    bot.user.setActivity("Utrecht || roblox.com || !help", { type: "PLAYING" });
 
 });
 
@@ -70,8 +70,6 @@ bot.on("message", async message => {
     var commands = bot.commands.get(command.slice(prefix.length));
 
     if (commands) commands.run(bot, message, arguments);
-
-
 });
 
 

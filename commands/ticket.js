@@ -3,7 +3,7 @@ const discord = require("discord.js");
 module.exports.run = async (bot, message, args) => {
  
     // ID van de categorie van de tickets.
-    const categoryId = "663847265231831040";
+    const categoryId = "669920780229804042";
 
     var argumenten = args.join(" ");
     if(!argumenten) argumenten = "Niet opgegeven";
@@ -19,7 +19,7 @@ module.exports.run = async (bot, message, args) => {
     message.guild.channels.forEach((channel) => {
  
         // Als ticket is gemaakt, zend bericht.
-        if (channel.name == userName.toLowerCase() + "-" + userDiscriminator) {
+        if (channel.name == userName.toLowerCase() + "-#" + userDiscriminator) {
  
             message.channel.send("Je hebt al een ticket aangemaakt");
  
@@ -44,7 +44,7 @@ module.exports.run = async (bot, message, args) => {
     message.channel.send(embedCreateTicket);
  
     // Maak kanaal en zet in juiste categorie.
-    message.guild.createChannel(userName + "-" + userDiscriminator, "text").then((createdChan) => { // Maak kanaal
+    message.guild.createChannel(userName + "-#" + userDiscriminator, "text").then((createdChan) => { // Maak kanaal
  
         createdChan.setParent(categoryId).then((settedParent) => { // Zet kanaal in category.
  
@@ -56,8 +56,9 @@ module.exports.run = async (bot, message, args) => {
                 "READ_MESSAGES": true, "SEND_MESSAGES": true,
                 "ATTACH_FILES": true, "CONNECT": true,
                 "CREATE_INSTANT_INVITE": false, "ADD_REACTIONS": true
- 
+            
             });
+
 
             var icon = message.author.displayAvatarURL;
  
