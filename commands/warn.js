@@ -19,55 +19,19 @@ module.exports.run = async (bot, message, args) => {
 
     if (!reason) return message.reply("geef een reden!");
 
-    if(!warns[user.id]) warns[user.id] = {
-        warns:0
-    };
-
-    warns[user.id].warns++;
-
-fs.writeFile("./warnings.json", JSON.stringify(warns), (err) => {
-    if(err) console.log(err)
-});
+    message.channel.send(`${user} is succesvol gewaarschuwd!`)
 
 var warnEmbed = new discord.RichEmbed()
 .setDescription("**__Warn__**")
 .setColor("#ffa500")
 .addField("Warned speler:", user)
 .addField("Warned door:", message.author)
-.addField("Aantal warns:", warns[user.id].warns)
 .addField("Reden:", reason);
 
 var warnChannel = message.guild.channels.find(`name`, "logs");
 if(!warnChannel) return message.reply("ik kan het logs kanaal niet vinden");
 
 warnChannel.send(warnEmbed);
-
-if(warns[user.id].warns == 3){
-    var warnbericht = new discord.RichEmbed()
-    .setDescription("**__PAS OP__** " + user)
-    .setColor("#ffa500")
-    .addField("Bericht:", "Nog één warn en je krijgt een kick!");
-
-    message.channel.send(warnbericht);
-
-} else if(warns[user.id].warns == 4){
-
-    message.guild.member(user).kick(reason);
-    message.channel.send(`${user} heeft ${warns[user.id].warns} warns, dus hij is gekicked!`);
-
-} else if(warns[user.id].warns == 5){
-    var warnbericht = new discord.RichEmbed()
-    .setDescription("**__PAS OP__** " + user)
-    .setColor("#ffa500")
-    .addField("Bericht:", "Nog één warn en je krijgt een ban!");
-
-    message.channel.send(warnbericht);
-
-}else if(warns[user.id].warns == 6){
-
-    message.guild.member(user).ban(reason);
-    message.channel.send(`${user} heeft ${warns[user.id].warns} warns, dus hij is gebanned!`);
-}
 }
 
 module.exports.help = {
