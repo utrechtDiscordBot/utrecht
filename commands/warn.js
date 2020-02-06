@@ -12,8 +12,6 @@ module.exports.run = async (bot, message, args) => {
     if(!user) return message.channel.send("de speler is niet gevonden!");
     var reden = arguments[0];
 
-    if(arguments[0]) message.reply(`${user} is succesvol gewaarschuwd!`);
-
     var warnEmbed = new discord.RichEmbed()
     .setTitle("Warn")
     .setColor("#ffa500")

@@ -3,7 +3,7 @@ const discord = require("discord.js");
 module.exports.run = async (bot, message, args) => {
  
 
-    message.delete();
+    message.delete(1500);
     // Id van category van tickets.
     const categoryId = "663847265231831040";
     if (!message.member.hasPermission("MANAGE_MESSAGES")) return message.reply("Jij kunt dit niet doen!");
