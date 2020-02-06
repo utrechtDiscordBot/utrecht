@@ -7,31 +7,23 @@ module.exports.run = async (bot, message, args) => {
 
     // !warn gebruiker reden
 
-    if (!message.member.hasPermission("MANAGE_MESSAGES")) return message.reply("Jij kunt dit niet doen!");
+    if(!message.member.hasPermission("MANAGE_MESSAGES")) return message.reply("jij kunt dit niet doen!");
+    var user = message.guild.member(message.mentions.users.first() || message.guild.members.get(arguments[0]));
+    if(!user) return message.channel.send("de speler is niet gevonden!");
+    var reden = arguments[0];
 
-    var user = message.guild.member(message.mentions.users.first() || message.guild.members.get(args[0]));
+    if(arguments[0]) message.reply(`${user} is succesvol gewaarschuwd!`);
 
-    if (!user) return message.reply("de speler is niet gevonden!");
+    var warnEmbed = new discord.RichEmbed()
+    .setTitle("Warn")
+    .setColor("#ffa500")
+    .addField("Warned user: ", user)
+    .addField("Warned door: ", message.author)
+    .addField("Reden: ", reden);
 
-    if (user.hasPermission("MANAGE_MESSAGES")) return message.reply("deze speler kunt u niet waarschuwen!");
+    var warnChannel = message.guild.channels.find('name', 'logs');
 
-    var reason = args.join(" ").slice(22);
-
-    if (!reason) return message.reply("geef een reden!");
-
-    message.channel.send(`${user} is succesvol gewaarschuwd!`)
-
-var warnEmbed = new discord.RichEmbed()
-.setDescription("**__Warn__**")
-.setColor("#ffa500")
-.addField("Warned speler:", user)
-.addField("Warned door:", message.author)
-.addField("Reden:", reason);
-
-var warnChannel = message.guild.channels.find(`name`, "logs");
-if(!warnChannel) return message.reply("ik kan het logs kanaal niet vinden");
-
-warnChannel.send(warnEmbed);
+    if(arguments[0]) warnChannel.send(warnEmbed);
 }
 
 module.exports.help = {
