@@ -4,6 +4,7 @@ module.exports.run = async (bot, message, args) => {
  
     // Id van category van tickets.
     const categoryId = `663847265231831040`;
+    const category2 = `675342005152514058`;
  
     var argumenten = args.join(" ");
     if (!message.member.hasPermission("MANAGE_MESSAGES")) return message.reply("Jij kunt dit niet doen!");
@@ -18,9 +19,11 @@ module.exports.run = async (bot, message, args) => {
         message.channel.send("Gelieve dit commando in een ticket kanaal te doen.");
  
     }
- 
+
+    message.channel(moveTo(category2))
+
     var embedCloseTicket = new discord.RichEmbed()
-        .setTitle("Hoi, " + message.channel.name)
+        .setTitle(`Ticket van ${message.channel.name}`)
         .setDescription("Je ticket is **__GESLOTEN__**. Wil je een nieuwe maken doe dan !ticket")
         .setColor("#FF0000")
         .addField("Reden van sluiting: ", argumenten)

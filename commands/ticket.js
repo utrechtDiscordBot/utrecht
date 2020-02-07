@@ -5,8 +5,8 @@ module.exports.run = async (bot, message, args) => {
     // ID van de categorie van de tickets.
     const categoryId = "663847265231831040";
 
-    var argumenten = args.join(" ");
-    if(!argumenten) argumenten = "Niet opgegeven";
+    var onderwerp = args.join(" ");
+    if(!onderwerp) onderwerp = "Geen onderwerp opgegeven";
     // Verkrijg Gebruikersnaam
     var userName = message.author.username;
     // Verkrijg discriminator
@@ -19,9 +19,9 @@ module.exports.run = async (bot, message, args) => {
     message.guild.channels.forEach((channel) => {
  
         // Als ticket is gemaakt, zend bericht.
-        if (channel.name == userName.toLowerCase() + "-#" + userDiscriminator) {
+        if (channel.name == userName.toLowerCase() + "#" + userDiscriminator) {
  
-            message.channel.send("Je hebt al een ticket aangemaakt");
+            message.channel.send("Je hebt al een ticket aangemaakt!");
  
             bool = true;
  
@@ -35,16 +35,16 @@ module.exports.run = async (bot, message, args) => {
     var icon = message.author.displayAvatarURL;
 
     var embedCreateTicket = new discord.RichEmbed()
-        .setTitle("Hoi, " + message.author.username)
-        .setColor("#ffa500")
+        .setTitle("Beste " + message.author.username)
+        .setColor("#FF0000")
         .setThumbnail(icon)
         .setDescription("Je ticket is volledig aangemaakt!")
-        .addField("Bericht: ", argumenten);
+        .addField("Onderwerp: ", onderwerp);
  
     message.channel.send(embedCreateTicket);
  
     // Maak kanaal en zet in juiste categorie.
-    message.guild.createChannel(userName + "-#" + userDiscriminator, "text").then((createdChan) => { // Maak kanaal
+    message.guild.createChannel(userName + "#" + userDiscriminator, "text").then((createdChan) => { // Maak kanaal
  
         createdChan.setParent(categoryId).then((settedParent) => { // Zet kanaal in category.
  
@@ -55,7 +55,8 @@ module.exports.run = async (bot, message, args) => {
  
                 "READ_MESSAGES": true, "SEND_MESSAGES": true,
                 "ATTACH_FILES": true, "CONNECT": true,
-                "CREATE_INSTANT_INVITE": false, "ADD_REACTIONS": true
+                "CREATE_INSTANT_INVITE": false, "ADD_REACTIONS": true,
+                "READ_MESSAGE_HISTORY": true
             
             });
 
@@ -64,11 +65,11 @@ module.exports.run = async (bot, message, args) => {
  
             var embedParent = new discord.RichEmbed()
                 .setTitle("Ticket")
-                .setDescription("Als je geen vraag of bericht heb meegegeven bij de command, type alvast je vraag/bericht in deze ticket!")
+                .setDescription("Als je geen onderwerp hebt meegegeven bij de command, \ntype alvast je onderwerp in deze ticket!\n\n Een stafflid zal zo snel mogelijk\nop deze ticket reageren met !claim")
                 .setColor("#ffa500")
                 .setThumbnail(icon)
                 .addField("Ticket aangemaakt door: ", message.author)
-                .addField("Bericht: ", argumenten);
+                .addField("Bericht: ", onderwerp);
  
             settedParent.send(embedParent);
         }).catch(err => {
