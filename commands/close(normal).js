@@ -35,7 +35,7 @@ module.exports.run = async (bot, message, args) => {
 
     var kanaal = message.guild.channels.find(`name`, `${message.channel}`);
 
-    kanaal.id(moveTo(category2));
+    kanaal.moveTo(category2);
  
 }
  
