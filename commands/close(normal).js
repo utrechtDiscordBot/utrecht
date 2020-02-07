@@ -42,6 +42,10 @@ module.exports.run = async (bot, message, args) => {
         "READ_MESSAGE_HISTORY": false
     
     });
+
+    var kanaal = message.channel;
+
+    kanaal.moveTo(category2);
  
 }
  
