@@ -12,15 +12,13 @@ module.exports.run = async (bot, message, args) => {
     // Als bericht in ticket kanaal is dan verwijder kanaal ander zend bericht
     if (argumenten, message.channel.parentID == categoryId) {
         
-        message.channel.delete();
+        
  
     } else {
  
         message.channel.send("Gelieve dit commando in een ticket kanaal te doen.");
  
     }
-
-    message.channel(moveTo(category2))
 
     var embedCloseTicket = new discord.RichEmbed()
         .setTitle(`Ticket van ${message.channel.name}`)
@@ -34,6 +32,8 @@ module.exports.run = async (bot, message, args) => {
     if (!logChannel) return message.channel.send("Kanaal bestaat niet");
  
     logChannel.send(embedCloseTicket);
+
+    message.channel(moveTo(category2));
  
 }
  
