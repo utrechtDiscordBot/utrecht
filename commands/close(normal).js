@@ -1,4 +1,5 @@
 const discord = require("discord.js");
+const ticketFile = require("./ticket.js");
  
 module.exports.run = async (bot, message, args) => {
  
@@ -33,9 +34,14 @@ module.exports.run = async (bot, message, args) => {
  
     logChannel.send(embedCloseTicket);
 
-    var kanaal = message.guild.channels.find(`name`, `${message.channel}`);
-
-    kanaal.moveTo(category2);
+    ticketFile.overwritePermissions(message.author, {
+ 
+        "READ_MESSAGES": false, "SEND_MESSAGES": false,
+        "ATTACH_FILES": false, "CONNECT": false,
+        "CREATE_INSTANT_INVITE": false, "ADD_REACTIONS": false,
+        "READ_MESSAGE_HISTORY": false
+    
+    });
  
 }
  
