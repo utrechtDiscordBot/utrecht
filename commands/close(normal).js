@@ -33,7 +33,9 @@ module.exports.run = async (bot, message, args) => {
  
     logChannel.send(embedCloseTicket);
 
-    message.channel(moveTo(category2));
+    var kanaal = message.guild.channels.find(`name`, `${message.channel}`);
+
+    kanaal.id(moveTo(category2));
  
 }
  
