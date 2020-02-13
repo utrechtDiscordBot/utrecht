@@ -18,9 +18,9 @@ module.exports.run = async (bot, message, args) => {
 
     var embedClaimTicket = new discord.RichEmbed()
         .setTitle("Hoi, " + message.channel.name)
-        .addField("Je ticket is geclaimed door: ", message.author)
         .setColor("#ffa500")
         .setThumbnail(icon)
+        .addField("Je ticket is geclaimed door: ", message.author)
         .setFooter("ticket geclaimed");
  
     // Vind kanaal voor de logs.
